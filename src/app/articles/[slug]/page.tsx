@@ -28,7 +28,12 @@ interface Post {
   author: {
     name: string
   }
-  body: any[] // Portable Textの型定義は複雑なので、一時的にany[]として定義
+  body: Block[]
+}
+
+type PageProps = {
+  params: { slug: string }
+  searchParams: Record<string, string | string[] | undefined>
 }
 
 async function getPost(slug: string) {
@@ -45,12 +50,8 @@ async function getPost(slug: string) {
   return client.fetch<Post>(query, { slug })
 }
 
-export default async function ArticlePage({
-  params
-}: {
-  params: { slug: string }
-}) {
-  const post = await getPost(params.slug)
+export default async function Page({ params }: PageProps) {
+  const post: Post = await getPost(params.slug)
 
   return (
     <article className="container mx-auto px-4 py-8 max-w-3xl">
@@ -78,13 +79,8 @@ export default async function ArticlePage({
   )
 }
 
-type PageProps = {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
 export async function generateMetadata({ params }: PageProps) {
-  const post = await getPost(params.slug)
+  const post: Post = await getPost(params.slug)
   
   return {
     title: `${post.title}｜Kakeibo Design`,
