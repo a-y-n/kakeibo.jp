@@ -31,6 +31,10 @@ interface Post {
   body: Block[]
 }
 
+interface GenerateMetadataProps {
+  params: { slug: string }
+}
+
 async function getPost(slug: string) {
   const query = `*[_type == "post" && slug.current == $slug][0] {
     title,
@@ -45,12 +49,8 @@ async function getPost(slug: string) {
   return client.fetch<Post>(query, { slug })
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const post: Post = await getPost(params.slug)
+export default async function Page(props: { params: { slug: string } }) {
+  const post: Post = await getPost(props.params.slug)
 
   return (
     <article className="container mx-auto px-4 py-8 max-w-3xl">
@@ -78,12 +78,8 @@ export default async function Page({
   )
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string }
-}) {
-  const post: Post = await getPost(params.slug)
+export async function generateMetadata(props: GenerateMetadataProps) {
+  const post: Post = await getPost(props.params.slug)
   
   return {
     title: `${post.title}｜Kakeibo Design`,
