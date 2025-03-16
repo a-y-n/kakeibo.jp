@@ -59,5 +59,12 @@ module.exports = {
     },
   },
   plugins: ["tailwindcss-animate"],
+  future: {
+    removeDeprecatedGapUtilities: true,
+    purgeLayersByDefault: true,
+  },
+  experimental: {
+    optimizeUniversalDefaults: true
+  }
 }
 
