@@ -9,6 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { Fragment } from 'react'
 
 export function Breadcrumbs() {
   const pathname = usePathname()
@@ -26,16 +27,16 @@ export function Breadcrumbs() {
           const isLast = index === segments.length - 1
 
           return (
-            <>
+            <Fragment key={path}>
               <BreadcrumbSeparator />
-              <BreadcrumbItem key={path}>
+              <BreadcrumbItem>
                 {isLast ? (
                   <BreadcrumbPage>{segment}</BreadcrumbPage>
                 ) : (
                   <BreadcrumbLink href={path}>{segment}</BreadcrumbLink>
                 )}
               </BreadcrumbItem>
-            </>
+            </Fragment>
           )
         })}
       </BreadcrumbList>
