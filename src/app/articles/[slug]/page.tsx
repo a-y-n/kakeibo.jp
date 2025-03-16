@@ -2,6 +2,7 @@ import { client } from '@/lib/sanity'
 import { urlFor } from '@/lib/image'
 import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
+import type { Metadata, ResolvingMetadata } from 'next'
 
 interface SanityImage {
   _type: 'image'
@@ -31,8 +32,9 @@ interface Post {
   body: Block[]
 }
 
-interface GenerateMetadataProps {
+type Props = {
   params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 async function getPost(slug: string) {
@@ -49,8 +51,8 @@ async function getPost(slug: string) {
   return client.fetch<Post>(query, { slug })
 }
 
-export default async function Page(props: { params: { slug: string } }) {
-  const post: Post = await getPost(props.params.slug)
+export default async function Page({ params }: Props) {
+  const post: Post = await getPost(params.slug)
 
   return (
     <article className="container mx-auto px-4 py-8 max-w-3xl">
@@ -78,8 +80,11 @@ export default async function Page(props: { params: { slug: string } }) {
   )
 }
 
-export async function generateMetadata(props: GenerateMetadataProps) {
-  const post: Post = await getPost(props.params.slug)
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const post: Post = await getPost(params.slug)
   
   return {
     title: `${post.title}｜Kakeibo Design`,
