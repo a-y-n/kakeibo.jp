@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
     styledComponents: true,
   },
   images: {
+    // Sanityのプロジェクトにあわせて変更
     remotePatterns: [
       {
         protocol: 'https',
