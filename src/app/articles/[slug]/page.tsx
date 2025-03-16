@@ -28,7 +28,7 @@ interface Post {
   author: {
     name: string
   }
-  body: Block[] // any[]からBlock[]に変更
+  body: any[] // Portable Textの型定義は複雑なので、一時的にany[]として定義
 }
 
 async function getPost(slug: string) {
@@ -78,11 +78,12 @@ export default async function ArticlePage({
   )
 }
 
-export async function generateMetadata({ 
-  params 
-}: { 
-  params: { slug: string } 
-}) {
+type PageProps = {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateMetadata({ params }: PageProps) {
   const post = await getPost(params.slug)
   
   return {
