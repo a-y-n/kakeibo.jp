@@ -3,12 +3,10 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import { Header } from "@/components/layout/header";
 
-const notoSansJP = Noto_Sans_JP({
-  preload: true,
+const noto = Noto_Sans_JP({
   subsets: ['latin'],
-  weight: ['400', '500', '700'], // 必要なウェイトのみ指定
+  weight: ['400', '500', '700'],
   display: 'swap',
-  variable: '--font-noto-sans-jp',
 });
 
 export const metadata: Metadata = {
@@ -23,9 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body
-        className={`${notoSansJP.variable} min-h-screen antialiased`}
-      >
+      <body className={noto.className}>
         <Header showBreadcrumbs={true} />
         <main className="container mx-auto">
           {children}
