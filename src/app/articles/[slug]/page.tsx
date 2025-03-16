@@ -11,6 +11,16 @@ interface SanityImage {
   }
 }
 
+interface Block {
+  _type: 'block'
+  style: string
+  children: {
+    _type: string
+    text: string
+    marks?: string[]
+  }[]
+}
+
 interface Post {
   title: string
   mainImage: SanityImage
@@ -18,7 +28,7 @@ interface Post {
   author: {
     name: string
   }
-  body: any[] // Portable Textの型定義は複雑なので、一時的にany[]として定義
+  body: Block[] // any[]からBlock[]に変更
 }
 
 async function getPost(slug: string) {
