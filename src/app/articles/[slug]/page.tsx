@@ -2,7 +2,7 @@ import { client } from '@/lib/sanity'
 import { urlFor } from '@/lib/image'
 import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
-import type { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata } from 'next'
 
 interface SanityImage {
   _type: 'image'
@@ -81,8 +81,7 @@ export default async function Page({ params }: Props) {
 }
 
 export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
+  { params }: Props
 ): Promise<Metadata> {
   const post: Post = await getPost(params.slug)
   
