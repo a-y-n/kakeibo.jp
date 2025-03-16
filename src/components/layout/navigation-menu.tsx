@@ -15,14 +15,14 @@ export function NavigationMenu() {
     <NavMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <Link href="/about" legacyBehavior passHref>
+          <Link href="/articles" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              会社概要
+              記事一覧
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>サービス</NavigationMenuTrigger>
+          <NavigationMenuTrigger>カテゴリ</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">

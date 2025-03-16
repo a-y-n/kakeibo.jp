@@ -39,7 +39,7 @@ export default async function ArticlesPage() {
       <h1 className="text-3xl font-bold mb-8">記事一覧</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
-          <article key={post._id} className="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+          <article key={post._id} className="bg-white rounded-lg shadow overflow-hidden">
             {post.mainImage && (
               <div className="relative h-48">
                 <Image

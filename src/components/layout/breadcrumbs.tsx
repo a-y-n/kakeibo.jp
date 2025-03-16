@@ -10,7 +10,7 @@ export function Breadcrumbs() {
   const paths = pathname.split('/').filter(path => path);
 
   return (
-    <nav className="container flex h-10 items-center space-x-1 text-sm text-muted-foreground">
+    <nav className="container mx-auto flex h-10 items-center space-x-1 text-sm text-muted-foreground">
       <Link
         href="/"
         className="transition-colors hover:text-foreground"
