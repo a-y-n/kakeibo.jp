@@ -31,11 +31,6 @@ interface Post {
   body: Block[]
 }
 
-type PageProps = {
-  params: { slug: string }
-  searchParams: Record<string, string | string[] | undefined>
-}
-
 async function getPost(slug: string) {
   const query = `*[_type == "post" && slug.current == $slug][0] {
     title,
@@ -50,7 +45,11 @@ async function getPost(slug: string) {
   return client.fetch<Post>(query, { slug })
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({
+  params,
+}: {
+  params: { slug: string }
+}) {
   const post: Post = await getPost(params.slug)
 
   return (
@@ -79,7 +78,11 @@ export default async function Page({ params }: PageProps) {
   )
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}) {
   const post: Post = await getPost(params.slug)
   
   return {
