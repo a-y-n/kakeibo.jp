@@ -3,14 +3,22 @@ import { urlFor } from '@/lib/image'
 import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
 
+interface SanityImage {
+  _type: 'image'
+  asset: {
+    _ref: string
+    _type: 'reference'
+  }
+}
+
 interface Post {
   title: string
-  mainImage: any
+  mainImage: SanityImage
   publishedAt: string
   author: {
     name: string
   }
-  body: any
+  body: any[] // Portable Textの型定義は複雑なので、一時的にany[]として定義
 }
 
 async function getPost(slug: string) {
@@ -67,5 +75,7 @@ export async function generateMetadata({
 }) {
   const post = await getPost(params.slug)
   
-  // ... existing code ...
+  return {
+    title: `${post.title}｜Kakeibo Design`,
+  }
 } 

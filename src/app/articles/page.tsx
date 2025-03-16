@@ -10,13 +10,21 @@ export const metadata: Metadata = {
   title: PAGE_TITLE + '｜Kakeibo Design',
 }
 
+interface SanityImage {
+  _type: 'image'
+  asset: {
+    _ref: string
+    _type: 'reference'
+  }
+}
+
 interface Post {
   _id: string
   title: string
   slug: {
     current: string
   }
-  mainImage: any
+  mainImage: SanityImage
   publishedAt: string
   author: {
     name: string

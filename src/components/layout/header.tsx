@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { NavigationMenu } from '@/components/layout/navigation-menu';
 import { Breadcrumbs } from '@/components/layout/breadcrumbs';
-import { Button } from '@/components/ui/button';
 
 export function Header({ showBreadcrumbs = false }: { showBreadcrumbs?: boolean }) {
   return (
