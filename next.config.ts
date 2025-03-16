@@ -13,6 +13,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    optimizeCss: false  // Oxideコンパイラーを無効化
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@tailwindcss/oxide': false
+    }
+    return config
+  }
 }
  
 export default nextConfig
