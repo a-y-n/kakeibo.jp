@@ -33,25 +33,11 @@ interface Post {
 }
 
 // Next.jsの型定義を使用
-type PageProps = {
+export default async function Page({
+  params,
+}: {
   params: { slug: string }
-}
-
-async function getPost(slug: string) {
-  const query = `*[_type == "post" && slug.current == $slug][0] {
-    title,
-    mainImage,
-    publishedAt,
-    author->{
-      name
-    },
-    body
-  }`
-  
-  return client.fetch<Post>(query, { slug })
-}
-
-export default async function Page({ params }: PageProps) {
+}) {
   const post = await getPost(params.slug)
 
   return (
@@ -80,10 +66,28 @@ export default async function Page({ params }: PageProps) {
   )
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
   const post = await getPost(params.slug)
   
   return {
     title: `${post.title}｜Kakeibo Design`,
   }
+}
+
+async function getPost(slug: string) {
+  const query = `*[_type == "post" && slug.current == $slug][0] {
+    title,
+    mainImage,
+    publishedAt,
+    author->{
+      name
+    },
+    body
+  }`
+  
+  return client.fetch<Post>(query, { slug })
 } 
