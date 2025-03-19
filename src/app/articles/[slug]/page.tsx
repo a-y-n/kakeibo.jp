@@ -32,13 +32,13 @@ interface Post {
   body: Block[]
 }
 
-// Next.jsの型定義を使用
 export default async function Page({
   params,
 }: {
   params: { slug: string }
 }) {
-  const post = await getPost(params.slug)
+  const slug = await params.slug
+  const post = await getPost(slug)
 
   return (
     <article className="container mx-auto px-4 py-8 max-w-3xl">
@@ -71,7 +71,8 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const post = await getPost(params.slug)
+  const slug = await params.slug
+  const post = await getPost(slug)
   
   return {
     title: `${post.title}｜Kakeibo Design`,
