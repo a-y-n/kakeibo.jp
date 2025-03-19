@@ -32,9 +32,9 @@ interface Post {
   body: Block[]
 }
 
-type Props = {
+// Next.jsの型定義を使用
+type PageProps = {
   params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 async function getPost(slug: string) {
@@ -51,8 +51,8 @@ async function getPost(slug: string) {
   return client.fetch<Post>(query, { slug })
 }
 
-export default async function Page({ params }: Props) {
-  const post: Post = await getPost(params.slug)
+export default async function Page({ params }: PageProps) {
+  const post = await getPost(params.slug)
 
   return (
     <article className="container mx-auto px-4 py-8 max-w-3xl">
@@ -80,10 +80,8 @@ export default async function Page({ params }: Props) {
   )
 }
 
-export async function generateMetadata(
-  { params }: Props
-): Promise<Metadata> {
-  const post: Post = await getPost(params.slug)
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const post = await getPost(params.slug)
   
   return {
     title: `${post.title}｜Kakeibo Design`,
