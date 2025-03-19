@@ -37,8 +37,8 @@ export default async function Page({
 }: {
   params: { slug: string }
 }) {
-  const slug = await params.slug
-  const post = await getPost(slug)
+  const resolvedParams = await params
+  const post = await getPost(resolvedParams.slug)
 
   return (
     <article className="container mx-auto px-4 py-8 max-w-3xl">
@@ -71,8 +71,8 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const slug = await params.slug
-  const post = await getPost(slug)
+  const resolvedParams = await params
+  const post = await getPost(resolvedParams.slug)
   
   return {
     title: `${post.title}｜Kakeibo Design`,
