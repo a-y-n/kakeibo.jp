@@ -32,13 +32,11 @@ interface Post {
   body: Block[]
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { slug: string }
+export default async function Page(props: {
+  params: Promise<{ slug: string }>
 }) {
-  const resolvedParams = await params
-  const post = await getPost(resolvedParams.slug)
+  const params = await props.params
+  const post = await getPost(params.slug)
 
   return (
     <article className="container mx-auto px-4 py-8 max-w-3xl">
@@ -66,13 +64,11 @@ export default async function Page({
   )
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string }
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const resolvedParams = await params
-  const post = await getPost(resolvedParams.slug)
+  const params = await props.params
+  const post = await getPost(params.slug)
   
   return {
     title: `${post.title}｜Kakeibo Design`,
