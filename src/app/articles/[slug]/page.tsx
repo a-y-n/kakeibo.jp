@@ -3,6 +3,7 @@ import { urlFor } from '@/lib/image'
 import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
 import type { Metadata } from 'next'
+import { draftMode } from 'next/headers'
 
 interface SanityImage {
   _type: 'image'
@@ -76,6 +77,8 @@ export async function generateMetadata(props: {
 }
 
 async function getPost(slug: string) {
+  const { isEnabled } = await draftMode()
+  
   const query = `*[_type == "post" && slug.current == $slug][0] {
     title,
     mainImage,
