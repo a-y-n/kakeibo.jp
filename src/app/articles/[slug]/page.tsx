@@ -77,8 +77,6 @@ export async function generateMetadata(props: {
 }
 
 async function getPost(slug: string) {
-  const { isEnabled } = await draftMode()
-  
   const query = `*[_type == "post" && slug.current == $slug][0] {
     title,
     mainImage,
