@@ -3,7 +3,6 @@ import { urlFor } from '@/lib/image'
 import Image from 'next/image'
 import { PortableText } from '@portabletext/react'
 import type { Metadata } from 'next'
-import { draftMode } from 'next/headers'
 
 interface SanityImage {
   _type: 'image'
